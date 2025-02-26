@@ -119,10 +119,7 @@ function Profile() {
     <div>
       <Navbar />
 
-      {user.type === 'JOBSEEKER' ?
-        <header className="bg-gradient-to-r from-seagreen to-teal-200 h-40 w-full relative"></header>
-        :  <header className="bg-gradient-to-r from-seagreen to-amber-200 h-40 w-full relative"></header>
-      }
+      <header className="bg-gradient-to-r from-seagreen to-teal-200 h-40 w-full relative"></header>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -156,9 +153,7 @@ function Profile() {
 
             <Modal opened={profileDropzoneOpened} onClose={profileDropzoneClose} title="">
               {user ? (
-                user.type === 'EMPLOYER' ?
-                  <ImageDropzoneButton userId={user.id} bucketName={"employer"} prefixPath={"profile"} />
-                  : <ImageDropzoneButton userId={user.id} bucketName={"job-seeker"} prefixPath={"profile"} />
+                <ImageDropzoneButton userId={user.id} bucketName={"job-seeker"} prefixPath={"profile"} />
               ) : (
                 <p>Loading...</p>
               )}
@@ -182,10 +177,7 @@ function Profile() {
 
               <div className="relative mt-3 ml-1">
                 <div 
-                  className={`
-                    flex items-center text-sm md:text-base font-semibold
-                    ${user.type === 'JOBSEEKER' ? 'text-green-500' : 'text-amber-400'}
-                  `}
+                  className="flex items-center text-sm md:text-base font-semibold text-green-500"
                 >
                   <span className="mr-[6px] -ml-[2px] pt-[1px] text-xl"><MdWorkspacePremium/></span>: {user.type}
                 </div>
@@ -307,39 +299,35 @@ function Profile() {
             </div>
           </div>
 
-          {user.type === 'JOBSEEKER' && (
-            <p className="mt-8 text-xl font-semibold">
-              Skills <span className="text-base text-gray-500 font-normal">{user.skills.length}</span>
-            </p>
-          )}
+          <p className="mt-8 text-xl font-semibold">
+            Skills <span className="text-base text-gray-500 font-normal">{user.skills.length}</span>
+          </p>
 
-          {user.type === 'JOBSEEKER' && (
-            <section className="max-w-6xl mt-4">
-              <div className="grid md:grid-cols-3 gap-6">
-                {user.skills.map((skill: any) => {
-                  return (
-                    <div className="inline-block h-[240px] lg:h-[224px]">
-                      <SkillCardGradient 
-                        title={skill.toSkill.name} 
-                        content={skill.toSkill.description}
-                      />
-                    </div>
-                  )
-                })}
+          <section className="max-w-6xl mt-4">
+            <div className="grid md:grid-cols-3 gap-6">
+              {user.skills.map((skill: any) => {
+                return (
+                  <div className="inline-block h-[240px] lg:h-[224px]">
+                    <SkillCardGradient 
+                      title={skill.toSkill.name} 
+                      content={skill.toSkill.description}
+                    />
+                  </div>
+                )
+              })}
 
-                <div 
-                  className="inline-block h-[240px] lg:h-[224px]"
-                  onClick={() => {}}
-                >
-                  <SkillCardGradient 
-                    title={'Add Skill'} 
-                    content={'Add more your skills, click here!'}
-                    isAddNewSkill
-                  />
-                </div>
+              <div 
+                className="inline-block h-[240px] lg:h-[224px]"
+                onClick={() => {}}
+              >
+                <SkillCardGradient 
+                  title={'Add Skill'} 
+                  content={'Add more your skills, click here!'}
+                  isAddNewSkill
+                />
               </div>
-            </section>
-          )}
+            </div>
+          </section>
 
           {/* Add Quick Action Buttons */}
           <div className="bg-white rounded-lg shadow-md p-4 mt-6 flex justify-center space-x-4">
